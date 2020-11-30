@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试学习 MVVM 原理</title>
+    <style>
+        .red{
+            color: red;
+        }
+        .blue{
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+<div id="test">
+    <h4>解析花括号属性</h4>
+    <p>{{content}}{{description}}</p>
+    <p>{{description}}</p>
+    <h4>测试双向数据绑定</h4>
+    <p>{{test.a}}</p>
+    <p><input type="text" v-model="test.a"></p>
+    <h4>测试v-model</h4>
+    <p><input type="text" v-model="test.a"></p>
+    <h4>解析v-for</h4>
+    <ul>
+        <li v-for="(item) in arr">
+            {{item}}
+        </li>
+    </ul>
+    <ul>
+        <li v-for="(item) in arr2">
+            姓名： {{item.name}}    &nbsp;  年龄：{{item.age}}
+        </li>
+    </ul>
+    <h4>解析v-bind</h4>
+    <p v-bind:class="vBindColor">我是用v-bind绑定的样式————红色</p>
+    <p v-bind:class="{red: styleObj.x === 1, blue: styleObj.x > 1}">我是用v-bind绑定对象样式</p>
+    <h5>解析v-on</h5>
+    <button v-on:click="fuckMe">打我</button>
+</div>
+</body>
+<script type="module">
+    import Due from './Due/index.js';
+
+    window.due = new Due({
+        el: 'test',
+        data: {
+            content: '测试',
+            description: '测试123',
+            test: {
+                a: '2323',
+                b: '232333'
+            },
+            arr: [1, 2, 3, 4, 5, 6],
+            arr2: [{name: '测试', age:12},{name:'话小猪', age: 33}],
+            vBindColor: 'red',
+            styleObj:{
+                x: 1,
+                y: 2
+            }
+        },
+        methods:{
+            fuckMe(){
+                console.log(this)
+                alert('打我',this);
+            }
+        },
+        computed: {
+
+        },
+        created: {
+
+        },
+    })
+
+
+</script>
+
+</html>
